@@ -2,7 +2,7 @@ function [conf, RT]=ConfidenceScaleDiscrete(window,p)
 
 curWindow = window;
 center = [p.mx p.my];
-keys = [KbName('LeftArrow') KbName('RightArrow') KbName('Space')];
+keys = [KbName(p.keys.left) KbName(p.keys.right) KbName('Space')];
 
 %% Initialise VAS scale
 VASwidth=p.stim.VASwidth_inPixels;
@@ -18,9 +18,9 @@ start_time = GetSecs;
 secs = start_time;
 max_x = center(1) + l;
 min_x = center(1) - l;
-steps_x = linspace(-l, l, 6);
+steps_x = linspace(-l, l, 10);
 range_x = max_x - min_x;
-index = ceil(rand*6);
+index = ceil(rand*10);
 xpos = center(1) + steps_x(index);
 while (secs - start_time) < p.times.confDuration_inSecs;
     WaitSecs(.07);
@@ -53,9 +53,9 @@ while (secs - start_time) < p.times.confDuration_inSecs;
     Screen('DrawLine',curWindow,[255 255 255],center(1)+VASwidth/2,center(2)+VASoffset+20,center(1)+VASwidth/2,center(2)+VASoffset);
     
     % % Draw minor ticks
-    tickMark = center(1) + linspace(-VASwidth/2,VASwidth/2,6);
+    tickMark = center(1) + linspace(-VASwidth/2,VASwidth/2,10);
     Screen('TextSize', curWindow, 24);
-    tickLabels = {'1','2','3','4','5','6'};
+    tickLabels = {'1','2','3','4','5','6','7','8','9','10'};
     for tick = 1:length(tickLabels)
         Screen('DrawLine',curWindow,[255 255 255],tickMark(tick),center(2)+VASoffset+10,tickMark(tick),center(2)+VASoffset);
         DrawFormattedText(curWindow,tickLabels{tick},tickMark(tick)-10,center(2)+VASoffset-30,[255 255 255]);
@@ -90,9 +90,9 @@ elseif deadline == 1;
     Screen('DrawLine',curWindow,[255 255 255],center(1)+VASwidth/2,center(2)+VASoffset+20,center(1)+VASwidth/2,center(2)+VASoffset);
     
     % % Draw minor ticks
-    tickMark = center(1) + linspace(-VASwidth/2,VASwidth/2,6);
+    tickMark = center(1) + linspace(-VASwidth/2,VASwidth/2,10);
     Screen('TextSize', curWindow, 24);
-    tickLabels = {'1','2','3','4','5','6'};
+    tickLabels = {'1','2','3','4','5','6','7','8','9','10'};
     for tick = 1:length(tickLabels)
         Screen('DrawLine',curWindow,[255 255 255],tickMark(tick),center(2)+VASoffset+10,tickMark(tick),center(2)+VASoffset);
         DrawFormattedText(curWindow,tickLabels{tick},tickMark(tick)-10,center(2)+VASoffset-30,[255 255 255]);
