@@ -37,7 +37,7 @@ while nreversals < staircase_reversal && i_trial < ntrials
     % Draw dots
     drawnXY = drawDots(p, n);
     DrawFormattedText(p.frame.ptr,'Which has more dots ? ', 'center',  p.my+p.stim.diam+50);
-    DrawFormattedText(p.frame.ptr,'["A"] ? ["D"]', 'center',  p.my+p.stim.diam+100);
+    DrawFormattedText(p.frame.ptr,'["<"] ? [">"]', 'center',  p.my+p.stim.diam+100);
     t=Screen('Flip', p.frame.ptr);
     
     % Check for keypress
@@ -47,11 +47,11 @@ while nreversals < staircase_reversal && i_trial < ntrials
     secs = start_secs;
     while ~trialComplete & (secs - start_secs) < p.times.dots
         [k respTime keyCode] = KbCheck();
-        if strcmp(KbName(keyCode),'a') | strcmp(KbName(keyCode),'d')
+        if strcmp(KbName(keyCode), p.keys.left) | strcmp(KbName(keyCode), p.keys.right)
             trialComplete = true;
-            if strcmp(KbName(keyCode),'a')
+            if strcmp(KbName(keyCode), p.keys.left)
                 key = 1;
-            elseif strcmp(KbName(keyCode),'d')
+            elseif strcmp(KbName(keyCode), p.keys.right)
                 key = 2;
             elseif strcmp(KbName(keyCode),'ESCAPE')
                 Screen('CloseAll')
@@ -61,7 +61,7 @@ while nreversals < staircase_reversal && i_trial < ntrials
             % Show confirmation of choice
             drawDots(p, n, drawnXY);
             DrawFormattedText(p.frame.ptr,'Which has more dots ? ', 'center',  p.my+p.stim.diam+50);
-            DrawFormattedText(p.frame.ptr,'["A"] ? ["D"]', 'center',  p.my+p.stim.diam+100);
+            DrawFormattedText(p.frame.ptr,'["<"] ? [">"]', 'center',  p.my+p.stim.diam+100);
             Screen('TextSize',p.frame.ptr,48);
             if key == 1
                 DrawFormattedText(p.frame.ptr,'*', p.stim.rectL(3)-p.stim.diam, p.my-p.stim.diam-50);
@@ -81,7 +81,7 @@ while nreversals < staircase_reversal && i_trial < ntrials
     Screen('FillRect', p.frame.ptr,p.white, p.stim.FixCrossL');
     Screen('FillRect', p.frame.ptr,p.white, p.stim.FixCrossR');
     DrawFormattedText(p.frame.ptr,'Which has more dots ? ', 'center',  p.my+p.stim.diam+50);
-    DrawFormattedText(p.frame.ptr,'["A"] ? ["D"]', 'center',  p.my+p.stim.diam+100);
+    DrawFormattedText(p.frame.ptr,'["<"] ? [">"]', 'center',  p.my+p.stim.diam+100);
     Screen('TextSize',p.frame.ptr,48);
     if trialComplete
         if key == 1
@@ -96,11 +96,11 @@ while nreversals < staircase_reversal && i_trial < ntrials
     while ~trialComplete
         FlushEvents;
         [k respTime keyCode] = KbCheck();
-        if strcmp(KbName(keyCode),'a') | strcmp(KbName(keyCode),'d')
+        if strcmp(KbName(keyCode), p.keys.left) | strcmp(KbName(keyCode), p.keys.right)
             trialComplete = true;
-            if strcmp(KbName(keyCode),'a')
+            if strcmp(KbName(keyCode), p.keys.left)
                 key = 1;
-            elseif strcmp(KbName(keyCode),'d')
+            elseif  strcmp(KbName(keyCode), p.keys.right)
                 key = 2;
             elseif strcmp(KbName(keyCode),'ESCAPE')
                 Screen('CloseAll')
@@ -113,7 +113,7 @@ while nreversals < staircase_reversal && i_trial < ntrials
             Screen('FillRect', p.frame.ptr,p.white, p.stim.FixCrossL');
             Screen('FillRect', p.frame.ptr,p.white, p.stim.FixCrossR');
             DrawFormattedText(p.frame.ptr,'Which has more dots ? ', 'center',  p.my+p.stim.diam+50);
-            DrawFormattedText(p.frame.ptr,'["A"] ? ["D"]', 'center',  p.my+p.stim.diam+100);
+            DrawFormattedText(p.frame.ptr,'["<"] ? [">"]', 'center',  p.my+p.stim.diam+100);
             Screen('TextSize',p.frame.ptr,48);
             if key == 1
                 DrawFormattedText(p.frame.ptr,'*', p.stim.rectL(3)-p.stim.diam, p.my-p.stim.diam-50);
