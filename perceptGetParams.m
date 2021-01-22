@@ -4,12 +4,6 @@ function p = perceptGetParams
 % SF 2012
 
 %% Subject parameters
-p.subID = inputdlg('Please Enter SubjectID','SubjectID');
-p.age = inputdlg('Age? ','Age');
-p.gender = inputdlg('Gender? M/F','Gender');
-p.hand = inputdlg('Handedness? R/L ','Hand');
-
-p.filename = ['perceptData' p.subID{1} '.mat'];
 
 if IsWin
     dataDir = [pwd '\perceptData\'];
@@ -20,14 +14,26 @@ if ~exist('perceptData')
     mkdir perceptData
 end
 
-p.filename = [dataDir p.filename];
+err = 0;
+while err < 1
+        p.subID = inputdlg('Please Enter SubjectID','SubjectID');
+        % p.age = inputdlg('Age? ','Age');
+        % p.gender = inputdlg('Gender? M/F','Gender');
+        % p.hand = inputdlg('Handedness? R/L ','Hand');
+        p.filename = [dataDir 'perceptData' p.subID{1} '.mat'];
+        if isfile(p.filename)
+            disp('SubjectID already exists! Please chose another SubjectID');
+        else
+            err = 1;
+        end
+end
 
 %% Window parameters
 
 p.sittingDist = 40;
 p.BackgroundColor = 0;
-p.windowsize =  []; % empty for full screen
-% p.windowsize = [800 600];
+% p.windowsize =  []; % empty for full screen
+p.windowsize = [800 600];
 p.frame = OpenDisplay(p.windowsize,p.BackgroundColor);
 t=Screen('Flip', p.frame.ptr); 
 % Size of the display
@@ -77,12 +83,17 @@ p.stim.VASheight_inPixels = degrees2pixels(p.stim.VASheight_inDegrees, p.sitting
 p.stim.VASoffset_inPixels = degrees2pixels(p.stim.VASoffset_inDegrees, p.sittingDist);
 p.stim.arrowWidth_inPixels = degrees2pixels(p.stim.arrowWidth_inDegrees, p.sittingDist);
 
+%% Keyboard responses
+
+p.keys.left = 'LeftArrow';
+p.keys.right = 'RightArrow';
+
 %% Timings
 
 p.times.fix = 1;
 p.times.dots = 0.7;
 p.times.postChoice = 0.5;
-p.times.confDuration_inSecs = 4;
+p.times.confDuration_inSecs = inf; %4;
 p.times.confFBDuration_inSecs = 0.5;
 p.times.feedback = 2;
 p.times.ITI = 1;
