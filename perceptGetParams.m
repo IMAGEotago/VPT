@@ -30,14 +30,16 @@ end
 
 %% Window parameters
 
+% Draw to the external screen if avaliable
+p.number = max(Screen('Screens'));
 p.sittingDist = 40;
 p.BackgroundColor = 0;
-% p.windowsize =  []; % empty for full screen
-p.windowsize = [800 600];
+p.windowsize =  []; % empty for full screen
+% p.windowsize = [800 600]; % Will only work on screen 1
 p.frame = OpenDisplay(p.windowsize,p.BackgroundColor);
 t=Screen('Flip', p.frame.ptr); 
 % Size of the display
-p.fov = min(p.frame.size);
+p.fov = min(p.frame.size)*1.4;
 p.frame.color = p.BackgroundColor;
 % Colors
 p.white = WhiteIndex(p.frame.ptr);

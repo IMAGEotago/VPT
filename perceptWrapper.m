@@ -11,7 +11,7 @@ KbName('UnifyKeyNames');
 %% Parameters
 
 p = perceptGetParams;
-Screen('TextSize',p.frame.ptr,24);
+Screen('TextSize', p.frame.ptr, 24);
 % HideCursor;
 
 %% Introduction
@@ -90,6 +90,8 @@ adapt  = 1;
 start_x = round(.5*p.stim.REF); % start at REF+50%REF
 results = perceptRunBlock(p, feedback, conf, ntrials, staircase_reversal, stepsize, adapt, start_x);
 xc=median(results.contrast(results.i_trial_lastreversal:end)); % contrast at end of block
+DATA(1).training = results;
+save(p.filename,'DATA');
 
 %% Training on task with confidence rating
 DrawFormattedText(p.frame.ptr, ['We will now give you some practice at using the confidence scale.\n\n After you make a left/right choice,\n' ...
@@ -111,6 +113,8 @@ start_x = xc;
 stepsize = 1;
 adapt = 0;
 results = perceptRunBlock(p, feedback, conf, ntrials, staircase_reversal, stepsize, adapt, start_x);
+DATA(2).training = results;
+save(p.filename,'DATA');
 
 %% Main task blocks (8 blocks of 25 trials)
 DrawFormattedText(p.frame.ptr, ['We will now ask you to do blocks of 25 trials each, just like in the practice \n\n' ...
