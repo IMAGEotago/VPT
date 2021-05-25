@@ -123,7 +123,7 @@ DrawFormattedText(p.frame.ptr, ['We will now ask you to do blocks of 25 trials e
 Screen('Flip', p.frame.ptr);
 WaitSecs(0.5);
 WaitAnyPress(KbName('space'));
-nblocks = 1; %8;
+nblocks = 8;
 feedback = 0;
 conf = 1;
 ntrials = 25;
