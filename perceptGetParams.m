@@ -20,7 +20,8 @@ while err < 1
         % p.age = inputdlg('Age? ','Age');
         % p.gender = inputdlg('Gender? M/F','Gender');
         % p.hand = inputdlg('Handedness? R/L ','Hand');
-        p.filename = [dataDir 'perceptData' p.subID{1} '.mat'];
+        % p.filename = [dataDir 'perceptData' p.subID{1} '.mat'];
+        p.filename = fullfile('perceptData', ['sub-', p.subID{1}, '_task-VPT_beh-', datestr(now, 'yyyy_mm_dd_HHMMSS'), '.mat']); % Create results file name
         if isfile(p.filename)
             disp('SubjectID already exists! Please chose another SubjectID');
         else
